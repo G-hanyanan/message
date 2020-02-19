@@ -4,6 +4,9 @@ const express = require('express')
 // express包初始化
 let server = express();
 
+// 托管静态资源
+server.use(express.static('public/'))
+
 server.get('/', (req, res) => {
     res.send('OK')
 
