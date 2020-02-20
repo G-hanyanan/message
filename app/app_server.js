@@ -73,6 +73,19 @@ server.get('/api/getMsg', (req, res) => {
     res.send(obj)
 })
 
+// 添加留言接口
+server.post('/api/addMsg', (req, res) => {
+
+    let { name, content } = req.body
+
+    msg.add(name, content);
+    let obj = {
+        code: 200,
+        msg: '添加成功'
+    }
+    res.send(obj)
+})
+
 
 server.listen(8080, () => {
     console.log('大人，您的服务器在8080端口启动成功')
