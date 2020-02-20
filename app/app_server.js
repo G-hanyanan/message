@@ -61,6 +61,18 @@ server.get('/api/login', (req, res) => {
     }
 })
 
+// 获取留言接口
+server.get('/api/getMsg', (req, res) => {
+    let data = msg.get();
+    let obj = {
+        code: 200,
+        data,
+        userName:req.session.userName,
+        msg: '获取成功'
+    }
+    res.send(obj)
+})
+
 
 server.listen(8080, () => {
     console.log('大人，您的服务器在8080端口启动成功')
