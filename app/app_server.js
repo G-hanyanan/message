@@ -34,6 +34,29 @@ server.post('/api/addUser', upload.single('cover'), (req, res) => {
     res.send(obj)
 })
 
+// 登录接口
+server.get('/api/login', (req, res) => {
+    let arr = user.get()
+    var { userName, psw } = req.query
+
+    // 判断账号密码是否已注册
+    let result = arr.find((item) => item.userName == userName && item.psw == psw)
+
+    if (result) {
+        let obj = {
+            code: 200,
+            msg: '登录成功'
+        }
+        res.send(obj)
+    } else {
+        let obj = {
+            code: 404,
+            msg: '登录失败'
+        }
+        res.send(obj)
+    }
+})
+
 
 server.listen(8080, () => {
     console.log('大人，您的服务器在8080端口启动成功')
