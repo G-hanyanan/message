@@ -20,6 +20,10 @@ let conf = {
 };
 server.use(session(conf))
 
+// 自定义模块
+const msg = require('../back-end/utils/msg');
+const user = require('../back-end/utils/users');
+
 // 托管静态资源
 server.use(express.static('../public/'))
 
@@ -67,7 +71,7 @@ server.get('/api/getMsg', (req, res) => {
     let obj = {
         code: 200,
         data,
-        userName:req.session.userName,
+        userName: req.session.userName,
         msg: '获取成功'
     }
     res.send(obj)
