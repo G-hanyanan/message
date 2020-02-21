@@ -93,6 +93,32 @@
       })
     }
     getAndShow()
+
+    // 添加留言
+    $('#btn_send').click(() => {
+      if (!userName) {
+        alert('请登录账号')
+        return
+      }
+      // 1. 获取用户输入 
+      let name = $("#user").text()
+      let content = $("#txt_content").val().trim()
+      // let dt = Date.now()
+      if (name === "" || content === "") {
+        alert('不能为空')
+        return
+      }
+
+      // 发送请求
+      $.post('http://localhost:8084/api/addMsg', { name, content }).then((res) => {
+        if (res.code === 200) {
+          getAndShow()
+        }
+      })
+      $("#txt_content").val("")
+      $('.main').animate({ scrollTop: $('#messages').height() }, 500);//scrollTop($('#messages').height());
+    })
+
   </script>
 
 </body>
