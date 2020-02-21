@@ -42,6 +42,40 @@
     </div>
     <script src="./jquery-1.8.1.js"></script>
 
+    <script>
+      $('#btn').click(function () {
+        // 获取用户名和密码
+        let userName = $('#username').val().trim()
+        let psw = $('#password').val().trim()
+        let cover = $('#cover')[0].files[0]
+
+        // 判断是否为空
+        if (userName === '' || psw === '') {
+          alert('不能为空')
+          return
+        }
+        // 请求
+        var fd = new FormData()
+        fd.append("userName", userName)
+        fd.append("psw", psw)
+        fd.append("cover", cover)
+        $.ajax({
+          url: 'http://localhost:8084/api/addUser',
+          type: 'post',
+          data: fd,
+          contentType: false,
+          processData: false,
+          success(res) {
+            if (res.code === 200) {
+              alert('注册成功！')
+            } else {
+              alert(res.msg)
+            }
+          }
+        })
+      });
+    </script>
+
 </body>
 
 </html>
