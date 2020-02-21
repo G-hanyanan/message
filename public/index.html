@@ -65,6 +65,35 @@
     </form>
   </div>
   <script src="./jquery-1.8.1.js"></script>
+  <script>
+    var userName;
+    // 封装获取留言  、渲染页面
+    const getAndShow = () => {
+      $.get('http://localhost:8084/api/getMsg').then(res => {
+        let str = ""
+        res.data.forEach(item => {
+          str += `<li class="media">
+                    <img class="mr-3" src="./assets/avatar.png" alt="张三" />
+                    <div class="media-body">
+                      <h4>${item.name}</h4>
+                      <p>${item.content}</p>
+                      <p>${item.dt}</p>
+                    </div>
+                  </li>`
+        })
+        $("#messages").html(str)
+        userName = res.userName
+
+        if (!userName) {
+          // alert('请登录账号')
+          return
+        } else {
+          $("#user").html(userName + `<a href="javascript:;" id="btnQuit">退出</a>`)
+        }
+      })
+    }
+    getAndShow()
+  </script>
 
 </body>
 
