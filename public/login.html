@@ -37,6 +37,27 @@
   </div>
 
   <script src="./jquery-1.8.1.js"></script>
+  <script>
+    $('#btn').click(function () {
+      // 获取用户名和密码
+      let name = $('#username').val().trim()
+      let password = $('#password').val().trim()
+
+      // 判断是否为空
+      if (name === '' || password === '') {
+        alert('不能为空')
+        return
+      }
+      // 请求
+      $.get('http://localhost:8084/api/login', { userName: name, psw: password })
+        .then((res) => {
+          if (res.code === 200) {
+            location.href = './index.html'
+          } else {
+            alert(res.msg)
+          }
+        })
+    });
   </script>
 </body>
 
